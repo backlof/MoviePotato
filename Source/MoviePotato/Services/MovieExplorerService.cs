@@ -8,21 +8,19 @@ namespace MoviePotato.Services
 {
     public class MovieExplorerService : IMovieService
     {
-        public List<Video> ShuffledListOfVideos { get; set; }
-        public Video RandomVideo { get; set; }
+        public List<Video> UnwatchedVideos { get; set; }
 
         public MovieExplorerService()
         {
             if (HasDatabase())
             {
-                ShuffledListOfVideos = MovieExplorerReader.GetAllMovies().Unwatched().Shuffle().ToList();
-                RandomVideo = ShuffledListOfVideos.FirstOrDefault(x => x.HasLocalCopy);
+                UnwatchedVideos = MovieExplorerReader.GetAllMovies().Unwatched().ToList();
             }
         }
 
-        public bool HasAtLeastOneUnWatchedMovie()
+        public bool HasAtLeastOneUnWatchedVideo()
         {
-            return ShuffledListOfVideos.Any();
+            return UnwatchedVideos.Any();
         }
 
         public bool HasDatabase()
@@ -30,14 +28,9 @@ namespace MoviePotato.Services
             return MovieExplorerReader.HasDatabase();
         }
 
-        public void PlayRandomUnwatchedMovie()
+        public Video GetRandomUnwatchedVideo()
         {
-            RandomVideo.Play();
-        }
-
-        public bool HasAtLeastOneLocalMovie()
-        {
-            return RandomVideo != null;
+            return UnwatchedVideos.Random();
         }
     }
 }

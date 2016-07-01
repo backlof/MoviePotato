@@ -1,13 +1,13 @@
-﻿namespace MoviePotato.Services
+﻿using MoviePotato.Models;
+
+namespace MoviePotato.Services
 {
-	public interface IMovieService
-	{
-		bool HasDatabase();
+    public interface IMovieService
+    {
+        bool HasDatabase();
 
-		bool HasAtLeastOneUnWatchedMovie();
+        bool HasAtLeastOneUnWatchedVideo();
 
-		bool HasAtLeastOneLocalMovie();
-
-		void PlayRandomUnwatchedMovie();
-	}
+        Video GetRandomUnwatchedVideo();
+    }
 }
