@@ -9,7 +9,7 @@ namespace MoviePotato.Functionality
 	{
 		private static readonly string DEFAULT_DATABASE = "Database.xml";
 
-		public static List<Models.Video> GetAllMovies()
+		public static List<Video> GetAllMovies()
 		{
 			return GetAllVideos(DEFAULT_DATABASE);
 		}

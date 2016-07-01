@@ -6,35 +6,38 @@ using System;
 
 namespace MoviePotato.Services
 {
-	public class MovieExplorerService : IMovieService
-	{
-		public List<Video> ShuffledListOfVideos { get; set; }
-		public Video RandomVideo { get; set; }
+    public class MovieExplorerService : IMovieService
+    {
+        public List<Video> ShuffledListOfVideos { get; set; }
+        public Video RandomVideo { get; set; }
 
-		public MovieExplorerService()
-		{
-			ShuffledListOfVideos = MovieExplorerReader.GetAllMovies().Unwatched().Shuffle().ToList();
-			RandomVideo = ShuffledListOfVideos.FirstOrDefault(x => x.HasLocalCopy);
-		}
+        public MovieExplorerService()
+        {
+            if (HasDatabase())
+            {
+                ShuffledListOfVideos = MovieExplorerReader.GetAllMovies().Unwatched().Shuffle().ToList();
+                RandomVideo = ShuffledListOfVideos.FirstOrDefault(x => x.HasLocalCopy);
+            }
+        }
 
-		public bool HasAtLeastOneUnWatchedMovie()
-		{
-			return ShuffledListOfVideos.Any();
-		}
+        public bool HasAtLeastOneUnWatchedMovie()
+        {
+            return ShuffledListOfVideos.Any();
+        }
 
-		public bool HasDatabase()
-		{
-			return MovieExplorerReader.HasDatabase();
-		}
+        public bool HasDatabase()
+        {
+            return MovieExplorerReader.HasDatabase();
+        }
 
-		public void PlayRandomUnwatchedMovie()
-		{
-			RandomVideo.Play();
-		}
+        public void PlayRandomUnwatchedMovie()
+        {
+            RandomVideo.Play();
+        }
 
-		public bool HasAtLeastOneLocalMovie()
-		{
-			return RandomVideo != null;
-		}
-	}
+        public bool HasAtLeastOneLocalMovie()
+        {
+            return RandomVideo != null;
+        }
+    }
 }
