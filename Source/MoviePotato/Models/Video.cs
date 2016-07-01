@@ -13,7 +13,7 @@ namespace MoviePotato.Models
         {
             get
             {
-                return Directory.GetFiles(Location, FileName, SearchOption.AllDirectories).FirstOrDefault();
+                return Directory.GetFiles(Location, "*" + FileName + "*", SearchOption.AllDirectories).FirstOrDefault();
             }
         }
 
