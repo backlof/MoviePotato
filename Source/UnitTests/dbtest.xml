@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DatabaseFile applicationID="MOVIEEXPLORER083">
+	<Category name="Videos">
+		<Directory path="C:\Users\MyUser\Videos" computerName="Computer">
+			<File name="Video1.mkv" size="848308083" time="131115925146089988" seen="true" />
+			<File name="Video2.mkv" size="510346134" time="131110425998017323" />
+		</Directory>
+	</Category>
+</DatabaseFile>

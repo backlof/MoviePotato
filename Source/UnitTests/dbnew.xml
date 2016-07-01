@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DatabaseFile applicationID="MOVIEEXPLORER083">
+	<Category name="Videos">
+		<Directory path="C:\Users\MyUser\Videos" computerName="Computer" />
+	</Category>
+</DatabaseFile>
