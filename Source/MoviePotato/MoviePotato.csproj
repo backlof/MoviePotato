@@ -86,20 +86,28 @@
     <ILRepack Parallel="true" Internalize="true" InputAssemblies="@(InputAssemblies)" TargetKind="Exe" OutputFile="$(OutputPath)\$(AssemblyName).exe" />
     <Exec Command="$(PostAfterBuildEvent)" />
   </Target>
+  <Target Name="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="$(BeforeBuildEvent)" />
+  </Target>
   <PropertyGroup>
-    <PostBuildEvent>
-			del /s /q "Ninject.xml"
-		</PostBuildEvent>
-    <PostAfterBuildEvent>
-			del /s /q "*.pdb"
-			del /s /q "*.exe.config"
-			del /s /q "*.dll"
-			mkdir "$(TargetDir)..\..\..\..\Distribute"
-			xcopy /y /d /e "$(TargetDir)*" "$(TargetDir)..\..\..\..\Distribute\"
-		</PostAfterBuildEvent>
+    <BeforeBuildEvent>
+      rmdir /s /q "$(TargetDir)..\..\..\..\Distribute"
+    </BeforeBuildEvent>
     <PreBuildEvent>
-			del /s /q "*"
-			rmdir /s /q "*"
-		</PreBuildEvent>
+      if $(ConfigurationName) == Release (
+      del /s /q "*"
+      rmdir /s /q "*"
+      )
+    </PreBuildEvent>
+    <PostBuildEvent>
+      del /s /q "Ninject.xml"
+    </PostBuildEvent>
+    <PostAfterBuildEvent>
+      del /s /q "*.pdb"
+      del /s /q "*.exe.config"
+      del /s /q "*.dll"
+      mkdir "$(TargetDir)..\..\..\..\Distribute"
+      xcopy /y /d /e "$(TargetDir)*" "$(TargetDir)..\..\..\..\Distribute\"
+    </PostAfterBuildEvent>
   </PropertyGroup>
 </Project>
